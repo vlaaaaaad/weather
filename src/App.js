@@ -11,7 +11,7 @@ export default function App() {
   return (
     <Router>
       <Route exact path="/" component = {Weather}></Route>
-      <Route path="/WeatherDetails" component = {WeatherDetails}></Route>
+      <Route path="/weather-details" component = {WeatherDetails}></Route>
     </Router>
   );
 }

@@ -200,7 +200,7 @@ export default function WeatherCard({city, remove}) {
           }}>Обновить
           </MenuItem>
           <Link
-            to={{pathname: "/WeatherDetails", city: weatherData.name}}
+            to={{pathname: "/weather-details", city: weatherData.name}}
             style={{textDecoration: 'none', color: 'inherit'}}
           >
             <MenuItem onClick={handleClose}>
