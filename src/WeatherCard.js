@@ -13,15 +13,15 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import './index.css';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 345,
     marginRight: 50,
     marginBottom: 50,
     borderRadius: 25,
-    padding: 10
+    padding: 10,
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -34,52 +34,52 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function WeatherCard({city, remove}) {
+export default function WeatherCard({ city, remove }) {
   const [cityName, setCityName] = useState(city);
   const [weatherData, setWeatherData] = useState({
-  "coord": {
-    "lon": 0,
-    "lat": 0
-  },
-  "weather": [
-    {
-      "id": 0,
-      "main": "",
-      "description": "",
-      "icon": ""
-    }
-  ],
-  "base": "",
-  "main": {
-    "temp": 0,
-    "feels_like": 0,
-    "temp_min": 0,
-    "temp_max": 0,
-    "pressure": 0,
-    "humidity": 0
-  },
-  "visibility": 0,
-  "wind": {
-    "speed": 0,
-    "deg": 0
-  },
-  "clouds": {
-    "all": 0
-  },
-  "dt": 0,
-  "sys": {
-    "type": 0,
-    "id": 0,
-    "message": 0,
-    "country": "",
-    "sunrise": 0,
-    "sunset": 0
-  },
-  "timezone": 0,
-  "id": 0,
-  "name": "",
-  "cod": 0
-});
+    coord: {
+      lon: 0,
+      lat: 0,
+    },
+    weather: [
+      {
+        id: 0,
+        main: '',
+        description: '',
+        icon: '',
+      },
+    ],
+    base: '',
+    main: {
+      temp: 0,
+      feels_like: 0,
+      temp_min: 0,
+      temp_max: 0,
+      pressure: 0,
+      humidity: 0,
+    },
+    visibility: 0,
+    wind: {
+      speed: 0,
+      deg: 0,
+    },
+    clouds: {
+      all: 0,
+    },
+    dt: 0,
+    sys: {
+      type: 0,
+      id: 0,
+      message: 0,
+      country: '',
+      sunrise: 0,
+      sunset: 0,
+    },
+    timezone: 0,
+    id: 0,
+    name: '',
+    cod: 0,
+  });
   const [updateTime, setUpdateTime] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [expanded, setExpanded] = useState(false);
@@ -102,8 +102,10 @@ export default function WeatherCard({city, remove}) {
   }, []);
 
   async function fetchWeather() {
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=" +
-    cityName + "&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b";
+    const url =
+      'https://api.openweathermap.org/data/2.5/weather?q=' +
+      cityName +
+      '&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b';
     const responce = await fetch(url);
     const data = await responce.json();
     setWeatherData(data);
@@ -111,7 +113,7 @@ export default function WeatherCard({city, remove}) {
     setLoading(false);
   }
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -125,63 +127,65 @@ export default function WeatherCard({city, remove}) {
     setExpanded(!expanded);
   };
 
-  if (loadind)
-    return <div className="loader"></div>;
+  if (loadind) return <div className="loader"></div>;
 
-  return(
+  return (
     <Card className={classes.root}>
-    <CardContent>
-      <Typography variant="h5">
-        {weatherData.name}
-      </Typography>
-      <div className="crutch">
-        <Typography variant="h2">
-          {Math.round(weatherData.main.temp)} °С
-        </Typography>
-        <img
-          className="image"
-          // src={"http://openweathermap.org/img/w/" +
-          //   weatherData.weather[0].icon + ".png"}
-          // src={require("./" + weatherData.weather[0].icon + ".png")}
-          src={process.env.PUBLIC_URL + '/'+ weatherData.weather[0].icon + '.png'}
-          alt={weatherData.weather.main}
-        />
-      </div>
-      <Typography>
-        {weatherData.weather[0].description.charAt(0).toUpperCase()
-          + weatherData.weather[0].description.substring(1)}
-      </Typography>
-      <Typography color="textSecondary">
-        Время последнего обновления: {updateTime}
-      </Typography>
-    </CardContent>
-    <Collapse in={expanded} timeout="auto" unmountOnExit>
       <CardContent>
-      <Typography>
-        Мин. t: {Math.round(weatherData.main.temp_min)} °С
-      </Typography>
-      <Typography>
-        Макс. t: {Math.round(weatherData.main.temp_max)} °С
-      </Typography>
-      <Typography>
-        Ощущается как: {Math.round(weatherData.main.feels_like)} °С
-      </Typography>
-      <Typography>
-        Скорость ветра: {Math.round(weatherData.wind.speed)} м/с
-      </Typography>
+        <Typography variant="h5">{weatherData.name}</Typography>
+        <div className="crutch">
+          <Typography variant="h2">
+            {Math.round(weatherData.main.temp)} °С
+          </Typography>
+          <img
+            className="image"
+            // src={"http://openweathermap.org/img/w/" +
+            //   weatherData.weather[0].icon + ".png"}
+            // src={require("./" + weatherData.weather[0].icon + ".png")}
+            src={
+              process.env.PUBLIC_URL +
+              '/' +
+              weatherData.weather[0].icon +
+              '.png'
+            }
+            alt={weatherData.weather.main}
+          />
+        </div>
+        <Typography>
+          {weatherData.weather[0].description.charAt(0).toUpperCase() +
+            weatherData.weather[0].description.substring(1)}
+        </Typography>
+        <Typography color="textSecondary">
+          Время последнего обновления: {updateTime}
+        </Typography>
       </CardContent>
-    </Collapse>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography>
+            Мин. t: {Math.round(weatherData.main.temp_min)} °С
+          </Typography>
+          <Typography>
+            Макс. t: {Math.round(weatherData.main.temp_max)} °С
+          </Typography>
+          <Typography>
+            Ощущается как: {Math.round(weatherData.main.feels_like)} °С
+          </Typography>
+          <Typography>
+            Скорость ветра: {Math.round(weatherData.wind.speed)} м/с
+          </Typography>
+        </CardContent>
+      </Collapse>
       <CardActions>
-      <IconButton
-        className={clsx(classes.expand, {
-          [classes.expandOpen]: expanded,
-        })}
-        onClick={handleExpand}
-        aria-expanded={expanded}
-        aria-label="Развернуть"
-      >
-        <ExpandMoreIcon />
-      </IconButton>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpand}
+          aria-expanded={expanded}
+          aria-label="Развернуть"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
         <IconButton onClick={handleClick}>
           <MoreHorizIcon />
         </IconButton>
@@ -191,28 +195,30 @@ export default function WeatherCard({city, remove}) {
           keepMounted
           open={Boolean(anchorEl)}
           onClose={handleClose}
+        >
+          <MenuItem
+            onClick={() => {
+              setExpanded(false);
+              setLoading(true);
+              fetchWeather();
+              setAnchorEl(null);
+            }}
           >
-          <MenuItem onClick={() => {
-            setExpanded(false);
-            setLoading(true);
-            fetchWeather();
-            setAnchorEl(null);
-          }}>Обновить
+            Обновить
           </MenuItem>
           <Link
-            to={{pathname: "/weather-details", city: weatherData.name}}
-            style={{textDecoration: 'none', color: 'inherit'}}
+            to={{ pathname: '/weather-details', city: weatherData.name }}
+            style={{ textDecoration: 'none', color: 'inherit' }}
           >
             <MenuItem onClick={handleClose}>
               Показать подробную информацию
             </MenuItem>
           </Link>
           <MenuItem onClick={handleDelete}>
-          <span style={{  color: "#f44336"  }}>Удалить</span>
+            <span style={{ color: '#f44336' }}>Удалить</span>
           </MenuItem>
         </Menu>
       </CardActions>
-
     </Card>
   );
 }
