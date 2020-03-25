@@ -83,7 +83,7 @@ export default function WeatherCard({ city, remove }) {
   const [updateTime, setUpdateTime] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [expanded, setExpanded] = useState(false);
-  const [loadind, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const classes = useStyles();
 
@@ -106,8 +106,8 @@ export default function WeatherCard({ city, remove }) {
       'https://api.openweathermap.org/data/2.5/weather?q=' +
       cityName +
       '&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b';
-    const responce = await fetch(url);
-    const data = await responce.json();
+    const response = await fetch(url);
+    const data = await response.json();
     setWeatherData(data);
     setUpdateTime(new Date().toLocaleTimeString());
     setLoading(false);
@@ -127,7 +127,7 @@ export default function WeatherCard({ city, remove }) {
     setExpanded(!expanded);
   };
 
-  if (loadind) return <div className="loader"></div>;
+  if (loading) return <div className="loader"></div>;
 
   return (
     <Card className={classes.root}>

@@ -13,8 +13,8 @@ export default function Weather({ add }) {
       'https://api.openweathermap.org/data/2.5/weather?q=' +
       buffer +
       '&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b';
-    const responce = await fetch(url);
-    const data = await responce.json();
+    const response = await fetch(url);
+    const data = await response.json();
     var code = data.cod === 200 ? true : false;
     if (code) add(buffer.toLowerCase());
     else {

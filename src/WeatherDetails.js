@@ -67,8 +67,8 @@ export default function WeatherDetails(props) {
       'https://api.openweathermap.org/data/2.5/weather?q=' +
       city +
       '&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b';
-    const responce = await fetch(url);
-    const data = await responce.json();
+    const response = await fetch(url);
+    const data = await response.json();
     setWeatherData(data);
     setUpdateTime(new Date().toLocaleTimeString());
   }
