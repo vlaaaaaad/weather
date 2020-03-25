@@ -15,8 +15,7 @@ export default function Weather({ add }) {
       '&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b';
     const response = await fetch(url);
     const data = await response.json();
-    var code = data.cod === 200 ? true : false;
-    if (code) add(buffer.toLowerCase());
+    if (data.cod === 200) add(buffer.toLowerCase());
     else {
       alert('"' + buffer + '" - не город');
     }
