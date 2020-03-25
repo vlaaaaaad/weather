@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 export default function App() {
   return (
     <Router>
-      <Route exact path="/" component={Weather}></Route>
-      <Route path="/weather-details" component={WeatherDetails}></Route>
+      <Route exact path="/" component={Weather} />
+      <Route path="/weather-details" component={WeatherDetails} />
     </Router>
   );
 }
