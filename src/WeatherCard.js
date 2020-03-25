@@ -12,7 +12,6 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import './index.css';
-
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -84,6 +83,10 @@ export default function WeatherCard({ city, remove }) {
     setExpanded(!expanded);
   };
 
+  const capitalize = (text) => {
+    return text.charAt(0).toUpperCase() + text.substring(1);
+  };
+
   if (loading) return <div className="loader"></div>;
 
   return (
@@ -109,8 +112,7 @@ export default function WeatherCard({ city, remove }) {
           />
         </div>
         <Typography>
-          {weatherData.weather[0].description.charAt(0).toUpperCase() +
-            weatherData.weather[0].description.substring(1)}
+          {capitalize(weatherData.weather[0].description)}
         </Typography>
         <Typography color="textSecondary">
           Время последнего обновления: {updateTime}
@@ -164,7 +166,11 @@ export default function WeatherCard({ city, remove }) {
             Обновить
           </MenuItem>
           <Link
-            to={{ pathname: '/weather-details', city: weatherData.name }}
+            to={{
+              pathname: '/weather-details',
+              city: weatherData.name,
+              capitalize: capitalize,
+            }}
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
             <MenuItem onClick={handleClose}>

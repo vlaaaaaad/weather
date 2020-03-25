@@ -54,8 +54,7 @@ export default function WeatherDetails(props) {
           <tr>
             <td>Погодные условия</td>
             <td>
-              {weatherData.weather[0].description.charAt(0).toUpperCase() +
-                weatherData.weather[0].description.substring(1)}
+              {props.location.capitalize(weatherData.weather[0].description)}
             </td>
           </tr>
           <tr>
