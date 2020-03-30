@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -46,8 +46,10 @@ export default function WeatherCard({ city, remove }) {
   useEffect(() => {
     // async function fetchWeather() {
     //   const city = cityName;
-    //   const url = "https://api.openweathermap.org/data/2.5/weather?q=" +
-    //   city + "&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b";
+    //   const url =
+    //     'https://api.openweathermap.org/data/2.5/weather?q=' +
+    //     city +
+    //     '&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b';
     //   const responce = await fetch(url);
     //   const data = await responce.json();
     //   setWeatherData(data);
@@ -57,17 +59,19 @@ export default function WeatherCard({ city, remove }) {
     fetchWeather();
   }, []);
 
-  async function fetchWeather() {
+  const fetchWeather = useCallback(() => {
     const url =
       'https://api.openweathermap.org/data/2.5/weather?q=' +
       cityName +
       '&lang=ru&units=metric&appid=5fc73283d7afc0b780eee68e8e3bb82b';
-    const response = await fetch(url);
-    const data = await response.json();
-    setWeatherData(data);
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setWeatherData(data);
+        setLoading(false);
+      });
     setUpdateTime(new Date().toLocaleTimeString());
-    setLoading(false);
-  }
+  }, [setWeatherData, setUpdateTime, setLoading]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
