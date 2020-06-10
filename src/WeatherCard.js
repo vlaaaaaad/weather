@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -41,7 +41,21 @@ export default function WeatherCard({ city, remove }) {
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // const [state, dispatch] = useReducer(reducer, initialState);
+  // const { weatherData, updateTime, loading } = state;
+
   const classes = useStyles();
+
+  // function reducer(state, action) {
+  //   switch (action.type) {
+  //     case 'start':
+  //       return {
+  //         loading: true,
+  //       };
+  //     case 'add':
+  //       return {};
+  //   }
+  // }
 
   useEffect(() => {
     // async function fetchWeather() {
